@@ -1,137 +1,127 @@
-<!doctype html>
-<html lang="zh" class="no-js">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LuSir的主页</title>
-  <meta name="Description" content="Home Page of iissnan">
-  <meta name="color-scheme" content="dark light">
-  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
-  <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
-</head>
-
-<!-- Google tag (gtag.js)
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-79R86201T1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-79R86201T1');
-</script> -->
-
-<body>
-  <div class="vi">
-    <h1 class="animate-slide-in-down">LuSir的主页</h1>
-    <div class="quote">
-      <span class="quote-line quote-line-start animate-slide-in-left"></span>
-      <span class="quote-icon quote-icon-start animate-slide-in-down">
-        <i class="icon icon-quotes-left"></i>
-      </span>
-      <p class="quote-content animate-slide-in-down">想象远比知识重要，知识有涯，而想象能环抱整个世界。</p>
-      <p class="quote-author animate-slide-in-down">—— <em>爱因斯坦</em></p>
-      <span class="quote-icon quote-icon-end animate-slide-in-up">
-        <i class="icon icon-quotes-right"></i>
-      </span>
-      <span class="quote-line quote-line-end animate-slide-in-right"></span>
-    </div>
-    <div class="links">
-      <a href="https://blog.1314047.xyz/" class="animate-slide-in-down"target="_blank">Blog</a>
-      <a href="https://pyq.1314047.xyz/" class="animate-slide-in-down"target="_blank">朋友圈</a>
-      <a href="https://weis-organization-6.gitbook.io/ge-ren-gong-ju-xiang" class="animate-slide-in-down"target="_blank">个人工具箱</a>
-      <a href="https://wiki.1314047.xyz/" class="animate-slide-in-down"target="_blank">我的文档</a>
-      <a href="https://nav.1314047.xyz/" class="animate-slide-in-down"target="_blank">我的书签</a>
-    </div>
-    <div class="location">
-      <span class="location-icon animate-slide-in-up">
-        <i class="icon icon-map-pin"></i>
-      </span>
-      <span class="location-text animate-slide-in-down">ChengDu - China</span>
-    </div>
-    <div class="relocating">
-      Navigating to: <span class="relocate-location"></span>...
-    </div>
-  </div>
-
-  <script src="assets/vendors/jquery-3.3.1.min.js"></script>
-  <script>
-    $(function () {
-      var SLIDE_IN_DOWN = { opacity: 1, top: 0 };
-      var SLIDE_IN_UP = { opacity: 1, bottom: 0 };
-      var SLIDE_IN_LEFT = { left: 0 };
-      var SLIDE_IN_RIGHT = { right: 0 };
-
-      registerCheatCode();
-      executeAnimations();
-
-      function executeAnimations() {
-        $.when()
-          .then(animateTitle)
-          .then(animateQuote)
-          .then(animateLinks)
-          .then(animateLocation);
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="google" content="notranslate">
+    <meta name="description" content="Kadriye's Home">
+    <meta name="Keywords" content="home,主页">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0;"/> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- <meta name="theme-color" content="#2979ff"> -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="assets">
+    <title>Kadriye's Home</title>
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet icon" href="https://zxecsm.github.io/favicon.ico">
+  </head>
+  <body>
+    <div id="box"></div>
+    <script>
+      // 获取网址图标
+      function getFavicon(url) {
+        return `https://hello.hechang.me/api/getfavicon?u=${encodeURIComponent(
+          url
+        )}`;
       }
-
-      function animateTitle() {
-        return animate('h1', SLIDE_IN_DOWN);
-      }
-
-      function animateQuote() {
-        return $.when(
-          animate('.quote-line-start', SLIDE_IN_LEFT),
-          animate('.quote-line-end',SLIDE_IN_RIGHT),
-          animate('.quote-icon-start', SLIDE_IN_DOWN),
-          animate('.quote-icon-end', SLIDE_IN_UP)
-        )
-          .then(function () {
-            return animate('.quote-content', SLIDE_IN_DOWN);
-          })
-          .then(function () {
-            return animate('.quote-author', SLIDE_IN_DOWN);
-          });
-      }
-
-      function animateLinks() {
-        var DELAY_STEP = 200;
-        var elements = $('.links a');
-        var concurrent = $.makeArray(elements)
-          .map(function (element, index) {
-            return animate(element, SLIDE_IN_DOWN, index * DELAY_STEP);
-          });
-
-        return $.when.apply($, concurrent);
-      }
-
-      function animateLocation() {
-        return $.when(
-          animate('.location-icon', SLIDE_IN_UP),
-          animate('.location-text', SLIDE_IN_DOWN)
-        );
-      }
-
-      function animate(selector, properties, delay, options) {
-        delay = delay || 0;
-        return $(selector).delay(delay)
-          .animate(properties, options)
-          .promise();
-      }
-
-      function registerCheatCode() {
-        $(document.body).on('keydown', function (event) {
-          var KEY_B = 66;
-
-          if (event.which === KEY_B) {
-            $('.relocate-location').text('Bookmark Page');
-            $('.relocating').css('opacity', 1);
-
-            window.setTimeout(function () {
-              window.location.href = '/bookmarks.html';
-            }, 1000);
-          }
-        });
-      }
-    });
-  </script>
-</body>
+      // 默认本地持久数据
+      const defaultLocalData = {
+        dark: 0, // 黑暗模式 0：随系统 1：开启 2：关闭
+        linkMode: 'row', // 排列模式 row: 横向 col：纵向
+        clickHeart: true, // 点击比心 true：开 false：关
+        keySound: true, // 提示音 true：开 false：关
+        inputEffect: true, // 模拟输入 true：开 false：关
+      };
+      // 标头
+      const title = 'root@Kadriye:~# ';
+      // 结束语
+      const endWord = 'Welcome to my homepage';
+      // 命令和输出结果
+      const data = [
+        {
+          cmd: 'contact me',
+          res: [
+            { type: 'text', name: 'hakuna matata🪄' },
+            {
+              type: 'link',
+              name: 'Github',
+              link: 'https://github.com/K1314047',
+              logo: './icon/github.svg',
+            },
+            {
+              type: 'link',
+              name: 'Emial',
+              link: 'luwei.br@gmail.com',
+              logo: './icon/email.svg',
+            },
+          ],
+        },
+        {
+          cmd: `./project.sh`,
+          res: [
+            {
+              type: 'link',
+              name: 'Kadriye Wiki',
+              link: 'https://wiki.1314047.xyz/',
+            },
+            {
+              type: 'link',
+              name: 'Kadriye Nav',
+              link: 'https://pan.1314047.xyz/',
+            },
+            {
+              type: 'link',
+              name: 'Kadriye 备忘录',
+              link: 'https://hexo.iove.eu.org/',
+            },
+            {
+              type: 'link',
+              name: 'Kadriye 日常',
+              link: 'https://luwei.iove.eu.org/',
+             },
+            {
+              type: 'link',
+              name: 'Tg频道发布',
+              link: 'https://tg.iove.eu.org/',
+            },
+            {
+              type: 'link',
+              name: 'Kadirye图床',
+              link: 'https://tu.iove.eu.org/',
+            },
+            {
+              type: 'link',
+              name: 'Kadiryephotos',
+              link: 'https://zhaopian.iove.eu.org/',
+            },
+          ],
+        },
+        {
+          cmd: `./date.sh`,
+          res: [{ type: 'date', name: '日期' }],
+        },
+        {
+          cmd: './setting.sh',
+          res: [{ type: 'setting', name: '设置' }],
+        },
+      ];
+      const settingData = [
+        {
+          cmd: './settingList.sh',
+          res: [
+            { type: 'dark', name: '黑暗模式：' },
+            { type: 'linkMode', name: '排列模式：' },
+            { type: 'inputEffect', name: '模拟输入：' },
+            { type: 'clickHeart', name: '点击比心：' },
+            { type: 'keySound', name: '提示音：' },
+            { type: 'back', name: '返回' },
+          ],
+        },
+      ];
+    </script>
+    <script src="static/js/utils.js"></script>
+    <script src="static/js/index.js"></script>
+    <script src="static/js/click.js"></script>
+  </body>
 </html>
